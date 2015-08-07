@@ -17,7 +17,12 @@ import control.DodajFaktureControl;
 import control.ListaProduktowControl;
 
 public class ListaProduktow extends JPanel {
+	
+	TextField textId;
 
+	public TextField getTextId() {
+		return textId;
+	}
 	class Tabela extends JPanel {
 
 		Tabela() throws SQLException {
@@ -25,6 +30,15 @@ public class ListaProduktow extends JPanel {
 			DefaultTableModel model = new ListaProduktowControl().StworzSelectProduktyIZwrocModel();
 
 			JTable table = new JTable(model);
+			
+			table.addMouseListener(new java.awt.event.MouseAdapter() {
+				@Override
+				public void mouseClicked(java.awt.event.MouseEvent evt) {
+					Integer row = table.rowAtPoint(evt.getPoint())+1;
+					getTextId().setText(row.toString());
+				}
+
+			});
 
 			this.add(new JScrollPane(table));
 		}
@@ -35,7 +49,7 @@ public class ListaProduktow extends JPanel {
 		Klawisze() {
 			setLayout(new GridLayout(1, 2));
 
-			TextField textId = new TextField();
+			textId = new TextField();
 			textId.setText("ID");
 
 			JButton wybierz = new JButton();

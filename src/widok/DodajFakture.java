@@ -152,7 +152,7 @@ class DodajFaktureOkienko extends WidokWzorzec {
 		setSize(200, 100);
 
 		JTextArea Arena = new JTextArea();
-
+		Arena.setEditable(false);
 		JButton ok = new JButton();
 		ok.setText("OK");
 

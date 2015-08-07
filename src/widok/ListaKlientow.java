@@ -18,6 +18,12 @@ import control.ListaKlientowControl;
 
 public class ListaKlientow extends WidokWzorzec {
 
+	TextField textId;
+
+	public TextField getTextId() {
+		return textId;
+	}
+
 	class Tabela extends JPanel {
 
 		Tabela() throws SQLException {
@@ -25,6 +31,15 @@ public class ListaKlientow extends WidokWzorzec {
 			DefaultTableModel model = new ListaKlientowControl().SelectKlientZwrocModel();
 
 			JTable table = new JTable(model);
+		
+			table.addMouseListener(new java.awt.event.MouseAdapter() {
+				@Override
+				public void mouseClicked(java.awt.event.MouseEvent evt) {
+					Integer row = table.rowAtPoint(evt.getPoint())+1;
+					getTextId().setText(row.toString());
+				}
+
+			});
 
 			this.add(new JScrollPane(table));
 		}
@@ -35,7 +50,7 @@ public class ListaKlientow extends WidokWzorzec {
 		Dol() {
 			setLayout(new GridLayout(1, 4));
 
-			TextField textId = new TextField();
+			textId = new TextField();
 			textId.setText("ID");
 
 			JButton cofnij = new JButton();
