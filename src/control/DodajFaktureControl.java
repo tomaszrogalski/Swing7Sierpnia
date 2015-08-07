@@ -186,6 +186,9 @@ public class DodajFaktureControl extends ControlWzorzec {
 				bool = false;
 			}
 		}
+		if (textNumer.getText().equals("")) {
+			bool = false;
+		}
 		return bool;
 	}
 
@@ -217,7 +220,6 @@ public class DodajFaktureControl extends ControlWzorzec {
 
 		List<String> numery = new ArrayList<String>();
 		while (rezultatZapytania.next()) {
-
 			numery.add(rezultatZapytania.getString(1));
 		}
 		return numery;

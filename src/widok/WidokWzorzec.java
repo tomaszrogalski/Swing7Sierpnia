@@ -12,7 +12,7 @@ public class WidokWzorzec extends JFrame {
 	public WidokWzorzec() {
 
 		setSize(400, 400);
-		setLocation(400, 100);
+		setLocation(100, 100);
 		setVisible(true);
 		setResizable(false);
 	}

@@ -74,11 +74,11 @@ public class ListaKlientow extends WidokWzorzec {
 					dispose();
 				}
 			});
-
+			add(cofnij);
 			add(textId);
 			add(wybierz);
 			add(dodaj);
-			add(cofnij);
+
 		}
 	}
 

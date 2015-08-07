@@ -26,10 +26,14 @@ public class DodajPozycje extends WidokWzorzec {
 	class KlawiszDodaj extends JPanel {
 
 		KlawiszDodaj() {
-			setLayout(new GridLayout(1, 1));
+			setLayout(new GridLayout(1, 2));
 
 			JButton dodaj = new JButton();
 			dodaj.setText("Dodaj");
+
+			JButton cofnij = new JButton();
+			cofnij.setText("Cofnij");
+
 			dodaj.addActionListener(new ActionListener() {
 
 				@Override
@@ -38,7 +42,15 @@ public class DodajPozycje extends WidokWzorzec {
 					dispose();
 				}
 			});
+			cofnij.addActionListener(new ActionListener() {
 
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			
+			add(cofnij);
 			add(dodaj);
 		}
 	}

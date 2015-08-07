@@ -32,9 +32,27 @@ public class DodajFakture extends WidokWzorzec {
 			labelKlient.setText("Klient");
 			labelPozycja.setText("Poycja");
 
+			JButton cofnij = new JButton();
+			cofnij.setText("Cofnij");
+
 			add(labelNumer);
 			add(labelKlient);
 			add(labelPozycja);
+			add(cofnij);
+
+			cofnij.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+						new ListaFaktur("ListaFaktur");
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					dispose();
+				}
+
+			});
 
 		}
 	}
@@ -106,13 +124,12 @@ public class DodajFakture extends WidokWzorzec {
 							}
 							DodajFaktureControl.WyczyscDaneUzyteDoDodaniaFaktury();
 							dispose();
-						}
-						else{
+						} else {
 							new DodajFaktureOkienko("UWAGA");
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
-					}					
+					}
 				}
 			});
 		}
@@ -146,10 +163,10 @@ class DodajFaktureOkienko extends WidokWzorzec {
 				dispose();
 			}
 		});
-		
-		Arena.append("Faktura o takim nr juz istnieje");
-		
-		add(Arena,BorderLayout.CENTER);
-		add(ok,BorderLayout.SOUTH);
+
+		Arena.append("Faktura o takim nr juz istnieje \n lub nie podales nr");
+
+		add(Arena, BorderLayout.CENTER);
+		add(ok, BorderLayout.SOUTH);
 	}
 }
