@@ -63,6 +63,8 @@ public class DodajFaktureControl extends ControlWzorzec {
 		while (rezultatZapytania.next()) {
 			id = rezultatZapytania.getInt(1);
 		}
+		rezultatZapytania.close();
+		zapytania.close();
 		return id;
 	}
 
@@ -99,6 +101,8 @@ public class DodajFaktureControl extends ControlWzorzec {
 		while (rezultatZapytania.next()) {
 			id = rezultatZapytania.getInt(1);
 		}
+		rezultatZapytania.close();
+		zapytania.close();
 		return id + 1;
 		//
 	}
@@ -156,7 +160,7 @@ public class DodajFaktureControl extends ControlWzorzec {
 				System.err.println("Blad podczas robienia ROLLBACK'a");
 			}
 		}
-
+		zapytania.close();
 	}
 
 	public static void wybierzKlienta(String klientID) {
@@ -192,6 +196,24 @@ public class DodajFaktureControl extends ControlWzorzec {
 		return bool;
 	}
 
+	public static boolean walidacjaCzySaDodaneJakiesPozycje() {
+
+		boolean bool = true;
+		if (listaPozycji.size() == 0) {
+			bool = false;
+		}
+		return bool;
+	}
+
+	public static boolean walidacjaCzyJestDodanyJakisKlient() {
+		System.out.println(klientId);
+		boolean bool = true;
+		if (klientId.equals("")) {
+			bool = false;
+		}
+		return bool;
+	}
+
 	public static List<String> SelectNumeryTabelaFaktury() throws SQLException {
 
 		Statement zapytania = null;
@@ -222,6 +244,8 @@ public class DodajFaktureControl extends ControlWzorzec {
 		while (rezultatZapytania.next()) {
 			numery.add(rezultatZapytania.getString(1));
 		}
+		rezultatZapytania.close();
+		zapytania.close();
 		return numery;
 	}
 }

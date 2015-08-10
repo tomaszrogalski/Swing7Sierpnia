@@ -21,7 +21,7 @@ public class ListaProduktowControl extends ControlWzorzec {
 
 		sql = "select swing.produkt.id as \"ID\",swing.produkt.nazwa as \"NAZWA\", swing.produkt.vat as \"VAT\" from swing.produkt where swing.produkt.pozycja_id is NULL";
 
-		return ZwrocModelZOtrzymanegoSelecta(sql);
+		return SelectDajSqlZwrocModelTabeli(sql);
 	}
 
 	public Produkt StworzSelectProduktIDodajGoDoKlasyProdukt(String id) throws SQLException {
@@ -59,6 +59,8 @@ public class ListaProduktowControl extends ControlWzorzec {
 			String vat = rezultatZapytania.getString(2);
 			produkt = new Produkt(nazwa, vat);
 		}
+		rezultatZapytania.close();
+		zapytania.close();
 		return produkt;
 	}
 
@@ -109,7 +111,9 @@ public class ListaProduktowControl extends ControlWzorzec {
 		while (rezultatZapytania.next()) {
 			numery.add(rezultatZapytania.getInt("produkt_id"));
 		}
-		System.out.println(numery);
+		
+		rezultatZapytania.close();
+		zapytania.close();
 		return numery;
 
 	}

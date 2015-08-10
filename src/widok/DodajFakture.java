@@ -108,24 +108,34 @@ public class DodajFakture extends WidokWzorzec {
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						if (DodajFaktureControl.walidacjaCzyNumerJestUnikalny(textNumer)) {
-							try {
-								System.out.println("1");
-								new DodajFaktureControl().StorzInsertFaktura(textNumer);
-							} catch (SQLException e2) {
+						if (DodajFaktureControl.walidacjaCzyJestDodanyJakisKlient()) {
+							if (DodajFaktureControl.walidacjaCzySaDodaneJakiesPozycje()) {
+								if (DodajFaktureControl.walidacjaCzyNumerJestUnikalny(textNumer)) {
 
-								e2.printStackTrace();
-							}
+									try {
+										System.out.println("1");
+										new DodajFaktureControl().StorzInsertFaktura(textNumer);
+									} catch (SQLException e2) {
 
-							try {
-								new ListaFaktur("ListaFaktur");
-							} catch (SQLException e1) {
-								e1.printStackTrace();
+										e2.printStackTrace();
+									}
+
+									try {
+										new ListaFaktur("ListaFaktur");
+									} catch (SQLException e1) {
+										e1.printStackTrace();
+									}
+									DodajFaktureControl.WyczyscDaneUzyteDoDodaniaFaktury();
+									dispose();
+
+								} else {
+									new DodajFaktureAlertOkienkoObslugaWalidacjiNumeru("UWAGA");
+								}
+							} else {
+								new DodajFaktureAlertOkienkoObslugaWalidacjiPozycji("UWAGA");
 							}
-							DodajFaktureControl.WyczyscDaneUzyteDoDodaniaFaktury();
-							dispose();
 						} else {
-							new DodajFaktureAlertOkienko("UWAGA");
+							new DodajFaktureAlertOkienkoObslugaWalidacjiKlienta("UWAGA");
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
@@ -144,11 +154,27 @@ public class DodajFakture extends WidokWzorzec {
 	}
 }
 
-class DodajFaktureAlertOkienko extends WzorzecAlertOkienko {
+class DodajFaktureAlertOkienkoObslugaWalidacjiNumeru extends WzorzecAlertOkienko {
 
-	public DodajFaktureAlertOkienko(String title) {
+	public DodajFaktureAlertOkienkoObslugaWalidacjiNumeru(String title) {
 		super(title);
 		getArena().append("Faktura o takim nr juz istnieje \n lub nie podales nr");
 
+	}
+}
+
+class DodajFaktureAlertOkienkoObslugaWalidacjiPozycji extends WzorzecAlertOkienko {
+
+	public DodajFaktureAlertOkienkoObslugaWalidacjiPozycji(String title) {
+		super(title);
+		getArena().append("Musi byc minimum 1 pozycja");
+	}
+}
+
+class DodajFaktureAlertOkienkoObslugaWalidacjiKlienta extends WzorzecAlertOkienko {
+
+	public DodajFaktureAlertOkienkoObslugaWalidacjiKlienta(String title) {
+		super(title);
+		getArena().append("Musi byc minimum 1 klient");
 	}
 }

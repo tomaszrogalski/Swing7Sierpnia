@@ -18,7 +18,7 @@ public class ListaFakturControl extends ControlWzorzec {
 
 		sql = "select swing.faktura.numer as \"NUMER FAKTURY\",swing.produkt.nazwa as \"PRODUKT\"	from swing.faktura left join (swing.pozycja left join swing.produkt on swing.pozycja.id=swing.produkt.pozycja_id) on swing.faktura.id=swing.pozycja.faktura_id Order by swing.faktura.numer ;";
 
-		return ZwrocModelZOtrzymanegoSelecta(sql);
+		return SelectDajSqlZwrocModelTabeli(sql);
 
 	}
 

@@ -22,7 +22,7 @@ public class ListaKlientowControl extends ControlWzorzec {
 
 		sql = "Select swing.klient.id as \"ID\",swing.klient.nip as \"NIP\",swing.klient.kod_pocztowy as \"KOD POCZTOWY\",swing.klient.miejscowosc as \"MIEJSCOWOSC\",swing.klient.nr_domu as \"NR DOMU\",swing.klient.ulica as \"ULICA\",swing.klient.imie as \"IMIE\" from swing.klient";
 
-		return ZwrocModelZOtrzymanegoSelecta(sql);
+		return SelectDajSqlZwrocModelTabeli(sql);
 
 	}
 
@@ -68,13 +68,14 @@ public class ListaKlientowControl extends ControlWzorzec {
 				System.err.println("Blad podczas robienia ROLLBACK'a");
 			}
 		}
-		
+
 		List<Integer> numery = new ArrayList<Integer>();
 		while (rezultatZapytania.next()) {
 			numery.add(rezultatZapytania.getInt("klient_id"));
 		}
+		rezultatZapytania.close();
+		zapytania.close();
 		return numery;
-		
 
 	}
 }

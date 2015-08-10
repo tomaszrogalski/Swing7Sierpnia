@@ -40,7 +40,7 @@ public class ControlWzorzec {
 		zapytania.close();
 	}
 
-	public DefaultTableModel ZwrocModelZOtrzymanegoSelecta(String sql) throws SQLException {
+	public DefaultTableModel SelectDajSqlZwrocModelTabeli(String sql) throws SQLException {
 
 		Statement zapytania = null;
 		ResultSet rezultatZapytania = null;
@@ -85,7 +85,9 @@ public class ControlWzorzec {
 
 			rows.addElement(newRow);
 		}
+		rezultatZapytania.close();
 		zapytania.close();
 		return new DefaultTableModel(rows, columnNames);
 	}
+
 }
