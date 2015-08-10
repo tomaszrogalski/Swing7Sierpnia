@@ -30,12 +30,18 @@ public class ListaKlientow extends WidokWzorzec {
 
 			DefaultTableModel model = new ListaKlientowControl().SelectKlientZwrocModel();
 
-			JTable table = new JTable(model);
-		
+			JTable table = new JTable(model) {
+
+				public boolean isCellEditable(int row, int col) {
+					return false;
+				}
+			};
+
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				@Override
 				public void mouseClicked(java.awt.event.MouseEvent evt) {
-					Integer row = table.rowAtPoint(evt.getPoint())+1;
+					Integer row = table.rowAtPoint(evt.getPoint()) + 1;
+					// Bo od zera numeruje a w bazie od 1
 					getTextId().setText(row.toString());
 				}
 

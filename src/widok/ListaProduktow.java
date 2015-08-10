@@ -17,24 +17,30 @@ import control.DodajFaktureControl;
 import control.ListaProduktowControl;
 
 public class ListaProduktow extends JPanel {
-	
+
 	TextField textId;
 
 	public TextField getTextId() {
 		return textId;
 	}
+
 	class Tabela extends JPanel {
 
 		Tabela() throws SQLException {
 
 			DefaultTableModel model = new ListaProduktowControl().StworzSelectProduktyIZwrocModel();
 
-			JTable table = new JTable(model);
-			
+			JTable table = new JTable(model) {
+
+				public boolean isCellEditable(int row, int col) {
+					return false;
+				}
+			};
+
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				@Override
 				public void mouseClicked(java.awt.event.MouseEvent evt) {
-					Integer row = table.rowAtPoint(evt.getPoint())+1;
+					Integer row = table.rowAtPoint(evt.getPoint()) + 1;
 					getTextId().setText(row.toString());
 				}
 
@@ -59,7 +65,8 @@ public class ListaProduktow extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					try {
-						DodajFaktureControl.DodajProduktDoListyProduktow(new ListaProduktowControl().StworzSelectProduktIDodajGoDoKlasyProdukt(textId.getText()));
+						DodajFaktureControl.DodajProduktDoListyProduktow(new ListaProduktowControl()
+								.StworzSelectProduktIDodajGoDoKlasyProdukt(textId.getText()));
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
