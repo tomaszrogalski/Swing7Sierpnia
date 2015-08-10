@@ -14,7 +14,7 @@ import widok.WidokWzorzec;
 
 public class DodajFaktureControl extends ControlWzorzec {
 
-	static String klientId = new String();
+	static Integer klientId = null;
 	static List<ArrayList<Produkt>> listaPozycji = new ArrayList<ArrayList<Produkt>>();
 	static ArrayList<Produkt> listaProduktow = new ArrayList<Produkt>();
 
@@ -163,7 +163,7 @@ public class DodajFaktureControl extends ControlWzorzec {
 		zapytania.close();
 	}
 
-	public static void wybierzKlienta(String klientID) {
+	public static void wybierzKlienta(Integer klientID) {
 		klientId = klientID;
 	}
 
@@ -177,7 +177,7 @@ public class DodajFaktureControl extends ControlWzorzec {
 	}
 
 	public static void WyczyscDaneUzyteDoDodaniaFaktury() {
-		klientId = new String();
+		klientId = null;
 		listaPozycji = new ArrayList<ArrayList<Produkt>>();
 		listaProduktow = new ArrayList<Produkt>();
 	}
@@ -208,7 +208,7 @@ public class DodajFaktureControl extends ControlWzorzec {
 	public static boolean walidacjaCzyJestDodanyJakisKlient() {
 		System.out.println(klientId);
 		boolean bool = true;
-		if (klientId.equals("")) {
+		if (klientId == null) {
 			bool = false;
 		}
 		return bool;

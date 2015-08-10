@@ -41,71 +41,24 @@ public class ListaProduktow extends JPanel {
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				@Override
 				public void mouseClicked(java.awt.event.MouseEvent evt) {
-					Integer row = table.rowAtPoint(evt.getPoint()) + 1;
-					getTextId().setText(row.toString());
-				}
-
-			});
-			this.add(new JScrollPane(table));
-
-		}
-	}
-
-	class Klawisze extends JPanel {
-
-		Klawisze() {
-			setLayout(new GridLayout(1, 2));
-
-			textId = new TextField();
-			textId.setText("ID");
-
-			JButton wybierz = new JButton();
-			wybierz.setText("Wybierz produkt");
-			wybierz.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					try {
-						if (ListaProduktowControl.walidacjaCzyWybranoOdpowiedniIndexProduktu(textId)) {
-
-							try {
-								DodajFaktureControl.DodajProduktDoListyProduktow(new ListaProduktowControl()
-										.StworzSelectProduktIDodajGoDoKlasyProdukt(textId.getText()));
-							} catch (SQLException e1) {
-								e1.printStackTrace();
-							}
-							DodajPozycje.dodajProduktDoTextAreaPozycja(textId.getText());
+					if (evt.getClickCount() == 2) {
+						Integer row = table.rowAtPoint(evt.getPoint()) + 1;
+						try {
+							DodajFaktureControl.DodajProduktDoListyProduktow(
+									new ListaProduktowControl().StworzSelectProduktIDodajGoDoKlasyProdukt(row));
+						} catch (SQLException e) {
+							e.printStackTrace();
 						}
-						else {
-							new ListaProduktowAlertOkienko("UWAGA");
-						}
-					} catch (NumberFormatException e1) {
-						e1.printStackTrace();
-					} catch (SQLException e1) {
-						e1.printStackTrace();
+						DodajPozycje.dodajProduktDoTextAreaPozycja(row);
 					}
 				}
 			});
-
-			add(textId);
-			add(wybierz);
-
+			this.add(new JScrollPane(table));
 		}
 	}
 
 	public ListaProduktow() throws SQLException {
 
-		this.add(new Tabela(), BorderLayout.CENTER);
-
-		this.add(new Klawisze(), BorderLayout.SOUTH);
-
-	}
-}
-
-class ListaProduktowAlertOkienko extends WzorzecAlertOkienko {
-
-	public ListaProduktowAlertOkienko(String title) {
-		super(title);
-		getArena().append("Nie ma produktu o takim id \n sprobuj jeszcze raz");
+		this.add(new Tabela());
 	}
 }

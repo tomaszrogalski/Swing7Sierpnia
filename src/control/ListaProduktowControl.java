@@ -24,7 +24,7 @@ public class ListaProduktowControl extends ControlWzorzec {
 		return SelectDajSqlZwrocModelTabeli(sql);
 	}
 
-	public Produkt StworzSelectProduktIDodajGoDoKlasyProdukt(String id) throws SQLException {
+	public Produkt StworzSelectProduktIDodajGoDoKlasyProdukt(Integer id) throws SQLException {
 
 		Statement zapytania = null;
 		ResultSet rezultatZapytania = null;

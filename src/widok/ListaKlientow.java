@@ -41,13 +41,13 @@ public class ListaKlientow extends WidokWzorzec {
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				@Override
 				public void mouseClicked(java.awt.event.MouseEvent evt) {
-					Integer row = table.rowAtPoint(evt.getPoint()) + 1;
-					// Bo od zera numeruje a w bazie od 1
-					getTextId().setText(row.toString());
+					if (evt.getClickCount() == 2) {
+						Integer row = table.rowAtPoint(evt.getPoint()) + 1;
+						DodajFaktureControl.wybierzKlienta(row);
+						dispose();
+					}
 				}
-
 			});
-
 			this.add(new JScrollPane(table));
 		}
 	}
@@ -55,37 +55,15 @@ public class ListaKlientow extends WidokWzorzec {
 	class Dol extends JPanel {
 
 		Dol() {
-			setLayout(new GridLayout(1, 4));
+			setLayout(new GridLayout(1, 2));
 
-			textId = new TextField();
-			textId.setText("ID");
 
 			JButton cofnij = new JButton();
 			cofnij.setText("Cofnij");
 
-			JButton wybierz = new JButton();
-			wybierz.setText("Wybierz klienta");
-
 			JButton dodaj = new JButton();
 			dodaj.setText("Dodaj nowego klienta");
-
-			wybierz.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					try {
-						if (ListaKlientowControl.walidacjaCzyKlientOPodanymIdIstnieje(textId)) {
-							DodajFaktureControl.wybierzKlienta(textId.getText());
-							dispose();
-						} else {
-							new ListaKlientowAlertOkienko("UWAGA");
-						}
-					} catch (SQLException e1) {
-
-						e1.printStackTrace();
-					}
-				}
-			});
+	
 			dodaj.addActionListener(new ActionListener() {
 
 				@Override
@@ -106,13 +84,10 @@ public class ListaKlientow extends WidokWzorzec {
 				}
 			});
 			add(cofnij);
-			add(textId);
-			add(wybierz);
 			add(dodaj);
 
 		}
 	}
-
 	public ListaKlientow(String title) throws SQLException {
 		setTitle(title);
 
@@ -123,10 +98,4 @@ public class ListaKlientow extends WidokWzorzec {
 		this.pack();
 	}
 }
-class ListaKlientowAlertOkienko extends WzorzecAlertOkienko {
 
-	public ListaKlientowAlertOkienko(String title) {
-		super(title);
-		getArena().append("Nie ma klienta o takim id \n sprobuj jeszcze raz");
-	}
-}

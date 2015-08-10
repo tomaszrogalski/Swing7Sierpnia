@@ -76,7 +76,7 @@ public class DodajPozycje extends WidokWzorzec {
 		this.add(new KlawiszDodaj(), BorderLayout.SOUTH);
 	}
 
-	public static void dodajProduktDoTextAreaPozycja(String text) {
-		Arena.append(text + "\n");
+	public static void dodajProduktDoTextAreaPozycja(Integer row) {
+		Arena.append(row + "\n");
 	}
 }
