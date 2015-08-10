@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
 import control.DodajFaktureControl;
@@ -45,8 +46,8 @@ public class ListaProduktow extends JPanel {
 				}
 
 			});
-
 			this.add(new JScrollPane(table));
+
 		}
 	}
 
@@ -65,12 +66,24 @@ public class ListaProduktow extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					try {
-						DodajFaktureControl.DodajProduktDoListyProduktow(new ListaProduktowControl()
-								.StworzSelectProduktIDodajGoDoKlasyProdukt(textId.getText()));
+						if (ListaProduktowControl.walidacjaCzyWybranoOdpowiedniIndexProduktu(textId)) {
+
+							try {
+								DodajFaktureControl.DodajProduktDoListyProduktow(new ListaProduktowControl()
+										.StworzSelectProduktIDodajGoDoKlasyProdukt(textId.getText()));
+							} catch (SQLException e1) {
+								e1.printStackTrace();
+							}
+							DodajPozycje.dodajProduktDoTextAreaPozycja(textId.getText());
+						}
+						else {
+							new ListaProduktowAlertOkienko("UWAGA");
+						}
+					} catch (NumberFormatException e1) {
+						e1.printStackTrace();
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
-					DodajPozycje.dodajProduktDoTextAreaPozycja(textId.getText());
 				}
 			});
 
@@ -84,8 +97,34 @@ public class ListaProduktow extends JPanel {
 
 		this.add(new Tabela(), BorderLayout.CENTER);
 
-		setSize(300, 300);
-
 		this.add(new Klawisze(), BorderLayout.SOUTH);
+
+	}
+}
+
+class ListaProduktowAlertOkienko extends WidokWzorzec {
+
+	public ListaProduktowAlertOkienko(String title) {
+
+		setTitle(title);
+		setSize(200, 100);
+
+		JTextArea Arena = new JTextArea();
+		Arena.setEditable(false);
+		JButton ok = new JButton();
+		ok.setText("OK");
+
+		ok.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+
+		Arena.append("Nie ma produktu o takim id \n sprobuj jeszcze raz");
+
+		add(Arena, BorderLayout.CENTER);
+		add(ok, BorderLayout.SOUTH);
 	}
 }

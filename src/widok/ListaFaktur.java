@@ -25,14 +25,16 @@ public class ListaFaktur extends WidokWzorzec {
 
 			DefaultTableModel model = new ListaFakturControl().SelectKlientZwrocModel();
 
-			JTable table = new JTable(model) {
-				public boolean isCellEditable(int row, int col) {
-					return false;
-				}
+			JTable table = new JTable(model)
+			{
+			    public boolean isCellEditable(int row, int col)
+			    {
+			        return false;
+			    }
 			};
-
-			this.add(new JScrollPane(table));
-
+			
+			this.add(new JScrollPane(table));		
+		
 		}
 	}
 
@@ -68,7 +70,7 @@ public class ListaFaktur extends WidokWzorzec {
 		addWindowListener(new WindowAdapter() {
 
 			public void windowClosing(WindowEvent we) {
-
+				
 				Polaczenia.ZamknijPolaczenie();
 
 				System.exit(0);
