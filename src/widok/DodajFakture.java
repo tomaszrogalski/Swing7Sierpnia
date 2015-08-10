@@ -1,18 +1,14 @@
 package widok;
 
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 import control.DodajFaktureControl;
 import inne.Produkt;
@@ -24,12 +20,12 @@ public class DodajFakture extends WidokWzorzec {
 		LewaStronaOkienka() {
 			setLayout(new GridLayout(4, 1));
 
-			Label labelNumer = new Label("NUMER");
-			Label labelKlient = new Label("KLIENT");
-			Label labelPozycja = new Label("POZYCJA");
+			JLabel labelNumer = new JLabel("NUMER");
+			JLabel labelKlient = new JLabel("KLIENT");
+			JLabel labelPozycja = new JLabel("POZYCJA");
 
 			JButton cofnij = new JButton("COFNIJ");
-			
+
 			add(labelNumer);
 			add(labelKlient);
 			add(labelPozycja);
@@ -38,7 +34,7 @@ public class DodajFakture extends WidokWzorzec {
 			cofnij.addActionListener(new ActionListener() {
 
 				@Override
-				public void actionPerformed(ActionEvent e) {		
+				public void actionPerformed(ActionEvent e) {
 					try {
 						new ListaFaktur("LISTA FAKTUR");
 					} catch (SQLException e1) {
@@ -95,7 +91,7 @@ public class DodajFakture extends WidokWzorzec {
 						DodajPozycje.dodajProduktDoTextAreaPozycja(product);
 					}
 				}
-				
+
 			});
 
 			dodajFakture.addActionListener(new ActionListener() {
@@ -163,7 +159,7 @@ class DodajFaktureAlertOkienkoObslugaWalidacjiPozycji extends WzorzecAlertOkienk
 
 	public DodajFaktureAlertOkienkoObslugaWalidacjiPozycji(String title) {
 		super(title);
-		getArena().append("MUSI BYC DODANA MINIMUM 1 POZYCJA!");
+		getArena().append("MUSI BYC DODANA \n MINIMUM 1 POZYCJA!");
 	}
 }
 

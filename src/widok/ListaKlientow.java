@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
 import control.DodajFaktureControl;
@@ -37,6 +36,7 @@ public class ListaKlientow extends WidokWzorzec {
 					return false;
 				}
 			};
+			table.getTableHeader().setReorderingAllowed(false);
 
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				@Override
@@ -57,11 +57,10 @@ public class ListaKlientow extends WidokWzorzec {
 		Dol() {
 			setLayout(new GridLayout(1, 2));
 
-
 			JButton cofnij = new JButton("COFNIJ");
 
 			JButton dodaj = new JButton("DODAJ NOWEGO KLIENTA");
-	
+
 			dodaj.addActionListener(new ActionListener() {
 
 				@Override
@@ -85,6 +84,7 @@ public class ListaKlientow extends WidokWzorzec {
 			add(dodaj);
 		}
 	}
+
 	public ListaKlientow(String title) throws SQLException {
 		setTitle(title);
 
@@ -93,6 +93,7 @@ public class ListaKlientow extends WidokWzorzec {
 		this.add(new Dol(), BorderLayout.SOUTH);
 
 		this.pack();
+		
+		setSize(600, 500);
 	}
 }
-

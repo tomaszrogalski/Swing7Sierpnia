@@ -1,6 +1,7 @@
 package widok;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,12 +41,10 @@ public class DodajPozycje extends WidokWzorzec {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (DodajFaktureControl.walidacjaCzyJestDodanyJakisProdukt()) {
-						
-					
-					DodajFaktureControl.dodajPozycje();
-					dispose();
-					}
-					else {
+
+						DodajFaktureControl.dodajPozycje();
+						dispose();
+					} else {
 						new DodajPozycjeAlertOkienkoObslugaWalidacjiCzyDodanoProdukt("UWAGA");
 					}
 				}
@@ -57,7 +56,7 @@ public class DodajPozycje extends WidokWzorzec {
 					dispose();
 				}
 			});
-			
+
 			add(cofnij);
 			add(dodaj);
 		}
@@ -67,10 +66,10 @@ public class DodajPozycje extends WidokWzorzec {
 
 		public GoraOkna() throws SQLException {
 
-			setLayout(new GridLayout(1, 2));
+			setLayout(new BorderLayout());
 
-			this.add(new Arena());
-			this.add(new ListaProduktow());
+			this.add(new Arena(),BorderLayout.WEST);
+			this.add(new ListaProduktow(),BorderLayout.EAST);
 		}
 	}
 
@@ -79,9 +78,10 @@ public class DodajPozycje extends WidokWzorzec {
 
 		this.add(new GoraOkna(), BorderLayout.CENTER);
 
-		setSize(1000, 600);
-
 		this.add(new KlawiszDodaj(), BorderLayout.SOUTH);
+		
+		setSize(600, 500);
+
 	}
 
 	public static void dodajProduktDoTextAreaPozycja(Produkt produkt) {

@@ -1,17 +1,13 @@
 package widok;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.ScrollPane;
 import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
 import control.DodajFaktureControl;
@@ -28,8 +24,8 @@ public class ListaProduktow extends JPanel {
 
 	class Tabela extends JPanel {
 
-		Tabela() throws SQLException {
-
+		Tabela() throws SQLException {			
+			
 			DefaultTableModel model = new ListaProduktowControl().StworzSelectProduktyIZwrocModel();
 
 			JTable table = new JTable(model) {
@@ -38,6 +34,7 @@ public class ListaProduktow extends JPanel {
 					return false;
 				}
 			};
+			table.getTableHeader().setReorderingAllowed(false);
 
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				@Override
@@ -54,7 +51,7 @@ public class ListaProduktow extends JPanel {
 						DodajPozycje.dodajProduktDoTextAreaPozycja(produkt);
 					}
 				}
-			});
+			});		
 			this.add(new JScrollPane(table));
 		}
 	}
@@ -62,5 +59,6 @@ public class ListaProduktow extends JPanel {
 	public ListaProduktow() throws SQLException {
 
 		this.add(new Tabela());
+	
 	}
 }

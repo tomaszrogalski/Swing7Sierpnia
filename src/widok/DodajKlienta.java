@@ -1,13 +1,9 @@
 package widok;
 
-import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -32,7 +28,7 @@ public class DodajKlienta extends WidokWzorzec {
 			JLabel labelNazwisko = new JLabel("NAZWISKO");
 
 			JButton cofnij = new JButton("COFNIJ");
-		
+
 			add(labelNip);
 			add(labelImie);
 			add(labelNazwisko);
@@ -115,5 +111,6 @@ public class DodajKlienta extends WidokWzorzec {
 
 		add(new LewaStronaOkienka());
 		add(new PrawaStronaOkienka());
+		
 	}
 }

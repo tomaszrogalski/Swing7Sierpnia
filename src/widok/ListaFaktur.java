@@ -24,17 +24,14 @@ public class ListaFaktur extends WidokWzorzec {
 		Tabela() throws SQLException {
 
 			DefaultTableModel model = new ListaFakturControl().SelectKlientZwrocModel();
-
-			JTable table = new JTable(model)
-			{
-			    public boolean isCellEditable(int row, int col)
-			    {
-			        return false;
-			    }
+			JTable table = new JTable(model) {
+				public boolean isCellEditable(int row, int col) {
+					return false;
+				}
 			};
-			
-			this.add(new JScrollPane(table));		
-		
+			table.getTableHeader().setReorderingAllowed(false);
+
+			this.add(new JScrollPane(table));
 		}
 	}
 
@@ -66,11 +63,12 @@ public class ListaFaktur extends WidokWzorzec {
 		this.add(new Dol(), BorderLayout.SOUTH);
 
 		this.pack();
+		setSize(600, 500);
 
 		addWindowListener(new WindowAdapter() {
 
 			public void windowClosing(WindowEvent we) {
-				
+
 				Polaczenia.ZamknijPolaczenie();
 
 				System.exit(0);
