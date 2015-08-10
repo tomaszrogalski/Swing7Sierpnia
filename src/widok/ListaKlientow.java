@@ -123,30 +123,10 @@ public class ListaKlientow extends WidokWzorzec {
 		this.pack();
 	}
 }
-//Mam 3 alerty ktore roznia sie arena.append czy powinienem zrobi w klasie nadrzednej?
-class ListaKlientowAlertOkienko extends WidokWzorzec {
+class ListaKlientowAlertOkienko extends WzorzecAlertOkienko {
 
 	public ListaKlientowAlertOkienko(String title) {
-
-		setTitle(title);
-		setSize(200, 100);
-
-		JTextArea Arena = new JTextArea();
-		Arena.setEditable(false);
-		JButton ok = new JButton();
-		ok.setText("OK");
-
-		ok.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-
-		Arena.append("Nie ma klienta o takim id \n sprobuj jeszcze raz");
-
-		add(Arena, BorderLayout.CENTER);
-		add(ok, BorderLayout.SOUTH);
+		super(title);
+		getArena().append("Nie ma klienta o takim id \n sprobuj jeszcze raz");
 	}
 }

@@ -125,7 +125,7 @@ public class DodajFakture extends WidokWzorzec {
 							DodajFaktureControl.WyczyscDaneUzyteDoDodaniaFaktury();
 							dispose();
 						} else {
-							new DodajFaktureOkienko("UWAGA");
+							new DodajFaktureAlertOkienko("UWAGA");
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
@@ -144,29 +144,11 @@ public class DodajFakture extends WidokWzorzec {
 	}
 }
 
-class DodajFaktureOkienko extends WidokWzorzec {
+class DodajFaktureAlertOkienko extends WzorzecAlertOkienko {
 
-	public DodajFaktureOkienko(String title) {
+	public DodajFaktureAlertOkienko(String title) {
+		super(title);
+		getArena().append("Faktura o takim nr juz istnieje \n lub nie podales nr");
 
-		setTitle(title);
-		setSize(200, 100);
-
-		JTextArea Arena = new JTextArea();
-		Arena.setEditable(false);
-		JButton ok = new JButton();
-		ok.setText("OK");
-
-		ok.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-
-		Arena.append("Faktura o takim nr juz istnieje \n lub nie podales nr");
-
-		add(Arena, BorderLayout.CENTER);
-		add(ok, BorderLayout.SOUTH);
 	}
 }
