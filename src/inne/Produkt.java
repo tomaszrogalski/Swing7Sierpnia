@@ -11,6 +11,10 @@ public class Produkt {
 		this.nazwa = nazwa;
 		this.vat = vat;
 	}
+	public Produkt(String nazwa) {
+		super();
+		this.nazwa = nazwa;	
+	}
 
 	public String getNazwa() {
 		return nazwa;

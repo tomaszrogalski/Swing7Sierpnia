@@ -24,17 +24,12 @@ public class DodajFakture extends WidokWzorzec {
 		LewaStronaOkienka() {
 			setLayout(new GridLayout(4, 1));
 
-			Label labelNumer = new Label();
-			Label labelKlient = new Label();
-			Label labelPozycja = new Label();
+			Label labelNumer = new Label("NUMER");
+			Label labelKlient = new Label("KLIENT");
+			Label labelPozycja = new Label("POZYCJA");
 
-			labelNumer.setText("Numer");
-			labelKlient.setText("Klient");
-			labelPozycja.setText("Poycja");
-
-			JButton cofnij = new JButton();
-			cofnij.setText("Cofnij");
-
+			JButton cofnij = new JButton("COFNIJ");
+			
 			add(labelNumer);
 			add(labelKlient);
 			add(labelPozycja);
@@ -43,17 +38,17 @@ public class DodajFakture extends WidokWzorzec {
 			cofnij.addActionListener(new ActionListener() {
 
 				@Override
-				public void actionPerformed(ActionEvent e) {
+				public void actionPerformed(ActionEvent e) {		
 					try {
-						new ListaFaktur("ListaFaktur");
+						new ListaFaktur("LISTA FAKTUR");
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
+					DodajFaktureControl.WyczyscDaneUzyteDoDodaniaFaktury();
 					dispose();
 				}
 
 			});
-
 		}
 	}
 
@@ -64,14 +59,11 @@ public class DodajFakture extends WidokWzorzec {
 
 			TextField textNumer = new TextField();
 
-			JButton wybierzKlienta = new JButton();
-			wybierzKlienta.setText("Wybierz Klienta");
+			JButton wybierzKlienta = new JButton("WYBIERZ KLIENTA");
 
-			JButton wybierzPozycje = new JButton();
-			wybierzPozycje.setText("Wybierz Pozycje");
+			JButton wybierzPozycje = new JButton("WYBIERZ POZYCJE");
 
-			JButton dodajFakture = new JButton();
-			dodajFakture.setText("Dodaj");
+			JButton dodajFakture = new JButton("DODAJ");
 
 			add(textNumer);
 			add(wybierzKlienta);
@@ -83,7 +75,7 @@ public class DodajFakture extends WidokWzorzec {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					try {
-						new ListaKlientow("ListaKlientow");
+						new ListaKlientow("LISTA KLIENTOW");
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
@@ -95,11 +87,15 @@ public class DodajFakture extends WidokWzorzec {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					try {
-						new DodajPozycje("DodajPozycje");
+						new DodajPozycje("DODAJ POZYCJE");
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
+					for (Produkt product : DodajFaktureControl.getListaProduktow()) {
+						DodajPozycje.dodajProduktDoTextAreaPozycja(product);
+					}
 				}
+				
 			});
 
 			dodajFakture.addActionListener(new ActionListener() {
@@ -121,7 +117,7 @@ public class DodajFakture extends WidokWzorzec {
 									}
 
 									try {
-										new ListaFaktur("ListaFaktur");
+										new ListaFaktur("LISTA FAKTUR");
 									} catch (SQLException e1) {
 										e1.printStackTrace();
 									}
@@ -158,7 +154,7 @@ class DodajFaktureAlertOkienkoObslugaWalidacjiNumeru extends WzorzecAlertOkienko
 
 	public DodajFaktureAlertOkienkoObslugaWalidacjiNumeru(String title) {
 		super(title);
-		getArena().append("Faktura o takim nr juz istnieje \n lub nie podales nr");
+		getArena().append("FAKTURA O TAKIM NUMERU ISTNIEJEJ \n LUB NIE PODALES NUMERU!");
 
 	}
 }
@@ -167,7 +163,7 @@ class DodajFaktureAlertOkienkoObslugaWalidacjiPozycji extends WzorzecAlertOkienk
 
 	public DodajFaktureAlertOkienkoObslugaWalidacjiPozycji(String title) {
 		super(title);
-		getArena().append("Musi byc minimum 1 pozycja");
+		getArena().append("MUSI BYC DODANA MINIMUM 1 POZYCJA!");
 	}
 }
 
@@ -175,6 +171,6 @@ class DodajFaktureAlertOkienkoObslugaWalidacjiKlienta extends WzorzecAlertOkienk
 
 	public DodajFaktureAlertOkienkoObslugaWalidacjiKlienta(String title) {
 		super(title);
-		getArena().append("Musi byc minimum 1 klient");
+		getArena().append("MUSI BYC DODANY KLIENT!");
 	}
 }

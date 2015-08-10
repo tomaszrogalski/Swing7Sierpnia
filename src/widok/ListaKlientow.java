@@ -58,18 +58,16 @@ public class ListaKlientow extends WidokWzorzec {
 			setLayout(new GridLayout(1, 2));
 
 
-			JButton cofnij = new JButton();
-			cofnij.setText("Cofnij");
+			JButton cofnij = new JButton("COFNIJ");
 
-			JButton dodaj = new JButton();
-			dodaj.setText("Dodaj nowego klienta");
+			JButton dodaj = new JButton("DODAJ NOWEGO KLIENTA");
 	
 			dodaj.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
 
-					new DodajKlienta("DodajKlienta");
+					new DodajKlienta("DODAJ KLIENTA");
 					dispose();
 				}
 			});
@@ -78,14 +76,13 @@ public class ListaKlientow extends WidokWzorzec {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 
-					new DodajFakture("DodajFakture");
+					new DodajFakture("DODAJ FAKTURE");
 
 					dispose();
 				}
 			});
 			add(cofnij);
 			add(dodaj);
-
 		}
 	}
 	public ListaKlientow(String title) throws SQLException {

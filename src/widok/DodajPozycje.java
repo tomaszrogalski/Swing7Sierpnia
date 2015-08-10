@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import control.DodajFaktureControl;
+import inne.Produkt;
 
 public class DodajPozycje extends WidokWzorzec {
 
@@ -19,6 +20,8 @@ public class DodajPozycje extends WidokWzorzec {
 	class Arena extends JPanel {
 		public Arena() {
 			Arena = new JTextArea();
+			Arena.setEditable(false);
+			Arena.setForeground(null);
 			add(Arena);
 		}
 	}
@@ -28,18 +31,23 @@ public class DodajPozycje extends WidokWzorzec {
 		KlawiszDodaj() {
 			setLayout(new GridLayout(1, 2));
 
-			JButton dodaj = new JButton();
-			dodaj.setText("Dodaj");
+			JButton dodaj = new JButton("DODAJ");
 
-			JButton cofnij = new JButton();
-			cofnij.setText("Cofnij");
+			JButton cofnij = new JButton("COFNIJ");
 
 			dodaj.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					if (DodajFaktureControl.walidacjaCzyJestDodanyJakisProdukt()) {
+						
+					
 					DodajFaktureControl.dodajPozycje();
 					dispose();
+					}
+					else {
+						new DodajPozycjeAlertOkienkoObslugaWalidacjiCzyDodanoProdukt("UWAGA");
+					}
 				}
 			});
 			cofnij.addActionListener(new ActionListener() {
@@ -76,7 +84,15 @@ public class DodajPozycje extends WidokWzorzec {
 		this.add(new KlawiszDodaj(), BorderLayout.SOUTH);
 	}
 
-	public static void dodajProduktDoTextAreaPozycja(Integer row) {
-		Arena.append(row + "\n");
+	public static void dodajProduktDoTextAreaPozycja(Produkt produkt) {
+		Arena.append(produkt.getNazwa() + "\n");
+	}
+}
+
+class DodajPozycjeAlertOkienkoObslugaWalidacjiCzyDodanoProdukt extends WzorzecAlertOkienko {
+
+	public DodajPozycjeAlertOkienkoObslugaWalidacjiCzyDodanoProdukt(String title) {
+		super(title);
+		getArena().append("MUSI BYC DODANY \n MINIMUM 1 PRODUKT!");
 	}
 }

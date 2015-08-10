@@ -9,14 +9,16 @@ import java.util.List;
 
 import inne.Polaczenia;
 import inne.Produkt;
-import inne.Start;
-import widok.WidokWzorzec;
 
 public class DodajFaktureControl extends ControlWzorzec {
 
 	static Integer klientId = null;
 	static List<ArrayList<Produkt>> listaPozycji = new ArrayList<ArrayList<Produkt>>();
 	static ArrayList<Produkt> listaProduktow = new ArrayList<Produkt>();
+
+	public static ArrayList<Produkt> getListaProduktow() {
+		return listaProduktow;
+	}
 
 	public int StworzSelectIdPozycja() throws SQLException {
 		String sql = new String();
@@ -206,9 +208,15 @@ public class DodajFaktureControl extends ControlWzorzec {
 	}
 
 	public static boolean walidacjaCzyJestDodanyJakisKlient() {
-		System.out.println(klientId);
 		boolean bool = true;
 		if (klientId == null) {
+			bool = false;
+		}
+		return bool;
+	}
+	public static boolean walidacjaCzyJestDodanyJakisProdukt() {
+		boolean bool = true;
+		if (listaProduktow.size() == 0) {
 			bool = false;
 		}
 		return bool;

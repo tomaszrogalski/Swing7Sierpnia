@@ -12,6 +12,6 @@ public class Start {
 		
 		Polaczenia.OtworzPolaczenie();
 		
-		new ListaFaktur("ListaFaktur");
+		new ListaFaktur("LISTA FAKTUR");
 	}
 }

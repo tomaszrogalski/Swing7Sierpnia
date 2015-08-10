@@ -9,7 +9,6 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 import inne.Polaczenia;
-import inne.Start;
 import widok.WidokWzorzec;
 
 public class ControlWzorzec {

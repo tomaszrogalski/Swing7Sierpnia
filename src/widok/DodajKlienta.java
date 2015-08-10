@@ -1,5 +1,6 @@
 package widok;
 
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.TextField;
@@ -10,6 +11,7 @@ import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import control.DodajKlientaControl;
@@ -21,25 +23,16 @@ public class DodajKlienta extends WidokWzorzec {
 		LewaStronaOkienka() {
 			setLayout(new GridLayout(8, 1));
 
-			Label labelNip = new Label();
-			Label labelKod = new Label();
-			Label labelMiejscowosc = new Label();
-			Label labelNrDomu = new Label();
-			Label labelUlica = new Label();
-			Label labelImie = new Label();
-			Label labelNazwisko = new Label();
+			JLabel labelNip = new JLabel("NIP");
+			JLabel labelKod = new JLabel("KOD POCZTOWY");
+			JLabel labelMiejscowosc = new JLabel("MIEJSCOWOSC");
+			JLabel labelNrDomu = new JLabel("NR DOMU");
+			JLabel labelUlica = new JLabel("ULICA");
+			JLabel labelImie = new JLabel("IMIE");
+			JLabel labelNazwisko = new JLabel("NAZWISKO");
 
-			labelNip.setText("Nip");
-			labelKod.setText("Kod");
-			labelMiejscowosc.setText("Miejscowosc");
-			labelNrDomu.setText("NrDomu");
-			labelUlica.setText("Ulica");
-			labelImie.setText("Imie");
-			labelNazwisko.setText("Nazwisko");
-
-			JButton cofnij = new JButton();
-			cofnij.setText("Cofnij");
-
+			JButton cofnij = new JButton("COFNIJ");
+		
 			add(labelNip);
 			add(labelImie);
 			add(labelNazwisko);
@@ -55,7 +48,7 @@ public class DodajKlienta extends WidokWzorzec {
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						new ListaKlientow("ListaKlientow");
+						new ListaKlientow("LISTA KLIENTOW");
 					} catch (SQLException e1) {
 
 						e1.printStackTrace();
@@ -79,8 +72,7 @@ public class DodajKlienta extends WidokWzorzec {
 			TextField textImie = new TextField();
 			TextField textNazwisko = new TextField();
 
-			JButton dodajKlienta = new JButton();
-			dodajKlienta.setText("Dodaj");
+			JButton dodajKlienta = new JButton("DODAJ");
 
 			add(textNip);
 			add(textImie);
@@ -105,7 +97,7 @@ public class DodajKlienta extends WidokWzorzec {
 					}
 
 					try {
-						new ListaKlientow("ListaKlientow");
+						new ListaKlientow("LISTA KLIENTOW");
 					} catch (SQLException e1) {
 
 						e1.printStackTrace();

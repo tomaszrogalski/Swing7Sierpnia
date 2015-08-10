@@ -36,8 +36,7 @@ class WzorzecAlertOkienko extends WidokWzorzec {
 		setSize(200, 100);
 
 		Arena.setEditable(false);
-		JButton ok = new JButton();
-		ok.setText("OK");
+		JButton ok = new JButton("OK");
 
 		ok.addActionListener(new ActionListener() {
 

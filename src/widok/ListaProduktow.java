@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 import control.DodajFaktureControl;
 import control.ListaProduktowControl;
+import inne.Produkt;
 
 public class ListaProduktow extends JPanel {
 
@@ -43,13 +44,14 @@ public class ListaProduktow extends JPanel {
 				public void mouseClicked(java.awt.event.MouseEvent evt) {
 					if (evt.getClickCount() == 2) {
 						Integer row = table.rowAtPoint(evt.getPoint()) + 1;
+						Produkt produkt = new Produkt((String) table.getValueAt(row - 1, 1));
 						try {
 							DodajFaktureControl.DodajProduktDoListyProduktow(
 									new ListaProduktowControl().StworzSelectProduktIDodajGoDoKlasyProdukt(row));
 						} catch (SQLException e) {
 							e.printStackTrace();
 						}
-						DodajPozycje.dodajProduktDoTextAreaPozycja(row);
+						DodajPozycje.dodajProduktDoTextAreaPozycja(produkt);
 					}
 				}
 			});

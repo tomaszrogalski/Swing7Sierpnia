@@ -50,7 +50,7 @@ public class ListaFaktur extends WidokWzorzec {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					new DodajFakture("DodajFakture");
+					new DodajFakture("DODAJ FAKTURE");
 					dispose();
 				}
 			});

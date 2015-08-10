@@ -11,7 +11,6 @@ import javax.swing.table.DefaultTableModel;
 
 import inne.Polaczenia;
 import inne.Produkt;
-import inne.Start;
 
 public class ListaProduktowControl extends ControlWzorzec {
 
